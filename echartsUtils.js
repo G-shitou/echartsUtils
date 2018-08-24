@@ -54,6 +54,10 @@ var myEcharts = {
                     data: []
                 };
                 (obj.isStack) && (datas[i].stack = obj.isStack);
+                (obj.type === 'bar') && (obj.isStack) && (datas[i].label = {
+                    show: true,
+                    position: 'inside'
+                });
                 for (var j = 0; j < obj.data.length; j++) {
                     if (kinds[i] == obj.data[j].kind) {
                         datas[i].data.push(obj.data[j].value);
@@ -204,7 +208,7 @@ var myEcharts = {
                     }
                 },
                 toolbox: {
-                    top: 25,
+                    top: 45,
                     right: 20,
                     feature: {
                         saveAsImage: {
@@ -248,7 +252,7 @@ var myEcharts = {
                     data: type
                 },
                 grid: {
-                    top: 75,
+                    top: 90,
                     bottom: 25
                 },
                 xAxis: {
