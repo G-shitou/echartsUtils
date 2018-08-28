@@ -247,9 +247,10 @@ var myEcharts = {
                             show: (initData.kind.length === 1) ? true : false,
                             title: '排序',
                             icon: 'path://M416.3,535.9v-95.6h382.4v95.6H416.3 M416.3,822.7v-95.6h191.2v95.6H416.3 M416.3,249v-95.6H990V249H416.3 M225.1,727.1h119.5L177.3,894.4L10,727.1h119.5V105.6h95.6L225.1,727.1L225.1,727.1z',
-                            onclick: function(e){
-                                var data = initData.data[0].data,
-                                    name = initData.name;
+                            onclick: function(parmes){
+                                var data = parmes.scheduler.ecInstance.getOption().series[0].data,
+                                    preData = parmes.scheduler.ecInstance.getOption().series[0].data,
+                                    name = parmes.scheduler.ecInstance.getOption().xAxis[0].data;
                                 var sortName = name.map(function(value,index){
                                     return {
                                         index:data[index],
@@ -262,17 +263,31 @@ var myEcharts = {
                                 });
                                 var sortData = data.sort(function(value1,value2){
                                     return value2 - value1; 
-                                });
-                                console.log(e);
-                                var myChart = echarts.init(document.getElementById(obj.echartsId));
-                                myChart.setOption({
-                                    xAxis:{
-                                        data:sortName
+                                });                               
+                                if(preData.toString() === sortData.toString()){
+                                    sortName.reverse();
+                                    sortData.reverse();
+                                }else if(preData.reverse().toString() === sortData.toString()){
+                                    var option = myEcharts.echartsData.initBarData({
+                                        data:obj.data,
+                                        type:obj.type
+                                    });
+                                    sortData = option.data[0].data;
+                                    sortName = option.name;           
+                                }
+                                parmes.scheduler.ecInstance.setOption({
+                                    xAxis: {
+                                        type: obj.isY ? 'value' : 'category',
+                                        data: sortName
+                                    },
+                                    yAxis: {
+                                        type: obj.isY ? 'category' : 'value',
+                                        data: sortName
                                     },
                                     series:{
                                         data:sortData
                                     }
-                                });
+                                })
                             }
                         }
                     }
