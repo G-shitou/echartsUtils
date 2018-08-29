@@ -53,7 +53,9 @@ var myEcharts = {
                     type: obj.type,
                     data: []
                 };
+                // 定义是否堆叠
                 (obj.isStack) && (datas[i].stack = obj.isStack);
+                // 定义堆叠的柱形图label样式,position位置为inside
                 (obj.type === 'bar') && (obj.isStack) && (datas[i].label = {
                     show: true,
                     position: 'inside'
@@ -265,9 +267,11 @@ var myEcharts = {
                                     return value2 - value1; 
                                 });                               
                                 if(preData.toString() === sortData.toString()){
+                                    // 如果已经是升序了,就降序
                                     sortName.reverse();
                                     sortData.reverse();
                                 }else if(preData.reverse().toString() === sortData.toString()){
+                                    // 如果已经是降序了,就回到初始值.
                                     var option = myEcharts.echartsData.initBarData({
                                         data:obj.data,
                                         type:obj.type
@@ -275,6 +279,7 @@ var myEcharts = {
                                     sortData = option.data[0].data;
                                     sortName = option.name;           
                                 }
+                                // 如果上面两个条件都不满足,不对已经排序的数据做处理,按照升序排序
                                 parmes.scheduler.ecInstance.setOption({
                                     xAxis: {
                                         type: obj.isY ? 'value' : 'category',
