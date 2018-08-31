@@ -265,20 +265,22 @@ var myEcharts = {
                                 });
                                 var sortData = data.sort(function(value1,value2){
                                     return value2 - value1; 
-                                });                               
+                                });                                                                                           
                                 if(preData.toString() === sortData.toString()){
-                                    // 如果已经是升序了,就降序
+                                    // 如果已经是降序了,就升序
                                     sortName.reverse();
                                     sortData.reverse();
                                 }else if(preData.reverse().toString() === sortData.toString()){
-                                    // 如果已经是降序了,就回到初始值.
+                                    // 如果已经是升序了,且初始值不是升序,就回到初始值.否则降序                                   
                                     var option = myEcharts.echartsData.initBarData({
                                         data:obj.data,
                                         type:obj.type
                                     });
-                                    sortData = option.data[0].data;
-                                    sortName = option.name;           
-                                }
+                                    if(preData.toString() === option.data[0].data.toString()){                                        
+                                        sortData = option.data[0].data;
+                                        sortName = option.name;
+                                    }             
+                                }                                                           
                                 // 如果上面两个条件都不满足,不对已经排序的数据做处理,按照升序排序
                                 parmes.scheduler.ecInstance.setOption({
                                     xAxis: {
