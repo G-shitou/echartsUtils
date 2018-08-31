@@ -3,7 +3,7 @@
 echarts.html中有详细示例,封装的js里有注释.
 ####  饼图
 生成饼图的option
-|param|Type|Default|isNecessary|Explain|
+| param | Type | Default | isNecessary | Explain |
 |:-:|:-:|:-:|:-:|:-:|
 |data|Array| |yes|饼图数据数组|
 |echartsId|string| |yes|图形区域的ID|
