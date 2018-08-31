@@ -3,6 +3,7 @@
 echarts.html中有详细示例,封装的js里有注释.
 ####  饼图
 生成饼图的option
+
 | param | Type | Default | isNecessary | Explain |
 | :-: | :-: | :-: | :-: | :-: |
 | data | Array| | yes | 饼图数据数组 |
@@ -14,6 +15,7 @@ echarts.html中有详细示例,封装的js里有注释.
 | showLegend | boolean | true | no | legend是否显示 |
 | pieTitle | string | null | no | 数据视图标题 |
 | opts | object | Default configuration | no | 自定义图形配置项 |
+
 例子如下
 ```
 myEcharts.initCharts({
